@@ -1,12 +1,12 @@
-// DOM Elements
-const resultElement = document.getElementById('result');
-const lengthElement = document.getElementById('length');
-const upperCaseElement = document.getElementById('uppercase');
-const lowerCaseElement = document.getElementById('lowercase');
-const numberElement = document.getElementById('numbers');
-const symbolElement = document.getElementById('symbols');
-const generateElement = document.getElementById('generate');
-const clipboardElement = document.getElementById('clipboard');
+//jshint esversion:6
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
+app.use(bodyParser.urlencoded({extended: true}));
+
+
+
 
 const randomFunction = {
     lower: getRandomLower,
@@ -74,3 +74,23 @@ function getRandomSymbol() {
     const randomIndex = Math.floor(Math.random() * symbols.length);
     return symbols[randomIndex];
 }
+
+app.get('/', function(req, res) {
+    res.sendFile(__dirname + '/index.html');
+});
+
+app.post('/', function(res, req) {
+    const resultElement = req.body.result;
+    const lengthElement = req.body.length;
+    const upperCaseElement = req.body.uppercase;
+    const lowerCaseElement = req.body.lowercase;
+    const numberElement = req.body.numbers;
+    const symbolElement = req.body.symbols;
+    const generateElement = req.body.generate;
+    const clipboardElement = req.body.clipboard;
+    
+});
+
+app.listen(3000, function() {
+    console.log('Server is listening on port 3000');
+});
