@@ -1,12 +1,19 @@
 //jshint esversion:6
-const express = require('express');
-const bodyParser = require('body-parser');
 
-const app = express();
-app.use(bodyParser.urlencoded({extended: true}));
+const express = require('express')
+const bodyParser = require('body-parser')
+const ejs = require('ejs')
 
+const app = express()
 
+app.set('view engine', 'ejs')
 
+app.use(bodyParser.urlencoded({extended: true}))
+app.use(express.static('public'))
+
+app.get('/', function(req, res) {
+    res.render('index')
+})
 
 const randomFunction = {
     lower: getRandomLower,
@@ -14,11 +21,11 @@ const randomFunction = {
     number: getRandomNumber,
     symbol: getRandomSymbol
 };
-
+/*
 generateElement.addEventListener('click', () => {
     const length = +lengthElement.value;
     const hasLower = lowerCaseElement.checked;
-    const hasUpper = upperCaseElement.checked;
+    const hasUpper = upperCaseElement.checked;  //may a have to add body parser right here to
     const hasNumber = numberElement.checked;
     const hasSymbol = symbolElement.checked;
 
@@ -27,14 +34,14 @@ generateElement.addEventListener('click', () => {
 
 // Copy password to clipboard
 clipboardElement.addEventListener('click', () => {
-    const password = resultElement.innerText;
+    const password = resultElement.innerText;  //may a have to add body parser right here to
     if (!password) {
         return;
     }
     navigator.clipboard.writeText(password);
     alert('Password copied to clipboard!');
 });
-
+*/
 // Generate password function
 function generatePassword(lower, upper, number, symbol, length) {
     let generatePassword = '';
@@ -75,9 +82,6 @@ function getRandomSymbol() {
     return symbols[randomIndex];
 }
 
-app.get('/', function(req, res) {
-    res.sendFile(__dirname + '/index.html');
-});
 
 app.post('/', function(res, req) {
     const resultElement = req.body.result;
@@ -88,7 +92,7 @@ app.post('/', function(res, req) {
     const symbolElement = req.body.symbols;
     const generateElement = req.body.generate;
     const clipboardElement = req.body.clipboard;
-    
+
 });
 
 app.listen(3000, function() {
