@@ -20,7 +20,7 @@ const randomFunction = {
     upper: getRandomUpper,
     number: getRandomNumber,
     symbol: getRandomSymbol
-};
+}
 /*
 generateElement.addEventListener('click', () => {
     const length = +lengthElement.value;
@@ -44,57 +44,57 @@ clipboardElement.addEventListener('click', () => {
 */
 // Generate password function
 function generatePassword(lower, upper, number, symbol, length) {
-    let generatePassword = '';
-    const typesCount = lower + upper + number + symbol;
-    const typesArr = [{lower}, {upper}, {number}, {symbol}].filter(item => Object.values(item)[0]);
+    let generatePassword = ''
+    const typesCount = lower + upper + number + symbol
+    const typesArr = [{lower}, {upper}, {number}, {symbol}].filter(item => Object.values(item)[0])
 
     if (typesCount === 0) {
-        return '';
+        return ''
     }
 
     for (let i = 0; i < length; i += typesCount) {
         typesArr.forEach(type => {
-            const functionName = Object.keys(type)[0];
-            generatePassword += randomFunction[functionName]();
-        });
+            const functionName = Object.keys(type)[0]
+            generatePassword += randomFunction[functionName]()
+        })
     }
 
-    const finalPassword = generatePassword.slice(0, length);
-    return finalPassword;
+    const finalPassword = generatePassword.slice(0, length)
+    return finalPassword
 }
 
 // Generator functions
 function getRandomLower() {
-    return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
+    return String.fromCharCode(Math.floor(Math.random() * 26) + 97)
 }
 
 function getRandomUpper() {
-    return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
+    return String.fromCharCode(Math.floor(Math.random() * 26) + 65)
 }
 
 function getRandomNumber() {
-    return String.fromCharCode(Math.floor(Math.random() * 10) + 48);
+    return String.fromCharCode(Math.floor(Math.random() * 10) + 48)
 }
 
 function getRandomSymbol() {
-    const symbols = '!@#$%^&*(){}[]=<>/,.';
-    const randomIndex = Math.floor(Math.random() * symbols.length);
-    return symbols[randomIndex];
+    const symbols = '!@#$%^&*(){}[]=<>/,.'
+    const randomIndex = Math.floor(Math.random() * symbols.length)
+    return symbols[randomIndex]
 }
 
 
 app.post('/', function(res, req) {
-    const resultElement = req.body.result;
-    const lengthElement = req.body.length;
-    const upperCaseElement = req.body.uppercase;
-    const lowerCaseElement = req.body.lowercase;
-    const numberElement = req.body.numbers;
-    const symbolElement = req.body.symbols;
-    const generateElement = req.body.generate;
-    const clipboardElement = req.body.clipboard;
+    const resultElement = req.body.result
+    const lengthElement = req.body.length
+    const upperCaseElement = req.body.uppercase
+    const lowerCaseElement = req.body.lowercase
+    const numberElement = req.body.numbers
+    const symbolElement = req.body.symbols
+    const generateElement = req.body.generate
+    const clipboardElement = req.body.clipboard
 
-});
+})
 
 app.listen(3000, function() {
-    console.log('Server is listening on port 3000');
-});
+    console.log('Server is listening on port 3000')
+})
